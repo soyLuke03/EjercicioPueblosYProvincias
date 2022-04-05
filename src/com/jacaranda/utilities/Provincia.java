@@ -1,5 +1,7 @@
 package com.jacaranda.utilities;
 
+import java.util.Collection;
+
 public class Provincia{
 
 	//Atributos de Provincia
@@ -9,12 +11,30 @@ public class Provincia{
 	private Double rentaPerCapita;
 	private Double superficie;
 		
+	private Collection<Provincia> pueblos;
 		
 	
 	//Constructores de Provincia
-	public Provincia (String nombre, String codigo) 
+	public Provincia (String nombre, String codigo) {
 		this.nombre = nombre.toUpperCase();  //Debe de almacenarse en mayus.
-		this.codigo = codigo;	//Debe ser un numero de 2 cifras
+
+		boolean esValido = false;								//2 caracteres numericos. Se lanza Exception. ok
+		if (codigo.length() == 2) {
+			for (int i = 0;i<codigo.length();i++) {
+				if (Character.isDigit(codigo.charAt(i))) {
+					esValido = true;
+				}
+				else {
+					esValido = false;
+				}
+				if (esValido == true) {
+					this.codigo = codigo;
+				}
+				else {
+				throw new PuebloException("[ERROR] El codigo no es valido");
+				}
+			}
+		}
 	}
 	
 	
@@ -63,13 +83,13 @@ public class Provincia{
 	
 	public String listadoPueblos() {
 		
-		return "";
+		return pueblos.toString();
 	}
 	
 	
 	public Integer numPueblos() {
 		
-		return -1;
+		return pueblos.size();
 	}
 	
 	

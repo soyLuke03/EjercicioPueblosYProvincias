@@ -12,7 +12,7 @@ public class Pueblo implements Comparable<Pueblo> {
 	private Double rentaPerCapita;
 	private Double superficie;
 	
-	private Collection<Pueblo> pueblo;
+	
 	
 	
 	//Constructores de Pueblo
@@ -22,7 +22,27 @@ public class Pueblo implements Comparable<Pueblo> {
 		super();
 		this.nombre = nombre.toUpperCase();  		//Se debe almacenar en mayus. ok
 		
-		this.codigo = codigo;						//5 caracteres numericos. Se lanza Exception.
+		
+		boolean esValido = false;								//5 caracteres numericos. Se lanza Exception. ok
+		if (codigo.length() == 5) {
+			for (int i = 0;i<codigo.length();i++) {
+				if (Character.isDigit(codigo.charAt(i))) {
+					esValido = true;
+				}
+				else {
+					esValido = false;
+				}
+				if (esValido == true) {
+					this.codigo = codigo;
+				}
+				else {
+				throw new PuebloException("[ERROR] El codigo no es valido");
+				}
+			}
+		}
+		else {
+			throw new PuebloException("[ERROR] El codigo no es valido");
+		}
 		
 		if (numeroHabitantes>=0) {
 			this.numeroHabitantes = numeroHabitantes;	//Lanzar Exception si es negativo.	ok		
@@ -31,6 +51,8 @@ public class Pueblo implements Comparable<Pueblo> {
 			throw new PuebloException("[ERROR] El numero es negativo");
 		}
 		
+		
+		
 		if (rentaPerCapita>=0) {						//Valor negativo ==> Exception ok
 			this.rentaPerCapita= rentaPerCapita;			
 		}
@@ -38,17 +60,54 @@ public class Pueblo implements Comparable<Pueblo> {
 			throw new PuebloException("[ERROR] El numero es negativo");
 		}
 		
-		this.superficie = superficie;				//Valor negativo ==> Exception
+		
+		if (superficie >= 0) {
+			this.superficie = superficie;				//Valor negativo ==> Exception	ok	
+		}
+		else {
+			throw new PuebloException("[ERROR] El numero es negativo");
+		}
 	
 	}
+	
+	
 	
 	
 	public Pueblo(String nombre, String codigo) {
-		this.nombre = nombre;		//Se lanzan Exceptions como el constructor de arriba.
-		this.codigo = codigo;
+		this.nombre = nombre.toUpperCase();  		//Se debe almacenar en mayus. ok
+		
+		
+		boolean esValido = false;								//5 caracteres numericos. Se lanza Exception. ok
+		if (codigo.length() == 5) {
+			for (int i = 0;i<codigo.length();i++) {
+				if (Character.isDigit(codigo.charAt(i))) {
+					esValido = true;
+				}
+				else {
+					esValido = false;
+				}
+				if (esValido == true) {
+					this.codigo = codigo;
+				}
+				else {
+				throw new PuebloException("[ERROR] El codigo no es valido");
+				}
+			}
+		}
+		else {
+			throw new PuebloException("[ERROR] El codigo no es valido");
+		}
 	}
 
 
+	//Methods
+	
+	
+	
+		
+	
+	//Methods
+	
 
 	//Getters-Setters de Pueblo
 	public Integer getNumeroHabitantes() {
@@ -57,9 +116,14 @@ public class Pueblo implements Comparable<Pueblo> {
 
 
 	public void setNumeroHabitantes(Integer numeroHabitantes) {
-		//Se lanza Exception aqui si el valor es negativo.
+		//Se lanza Exception aqui si el valor es negativo. ok
 		
-		this.numeroHabitantes = numeroHabitantes;
+		if (numeroHabitantes>=0) {
+			this.numeroHabitantes = numeroHabitantes;		
+		}
+		else {
+			throw new PuebloException("[ERROR] El numero es negativo");
+		}
 	}
 
 
@@ -69,9 +133,14 @@ public class Pueblo implements Comparable<Pueblo> {
 
 
 	public void setRentaPerCapita(Double rentaPerCapita) {
-		//Exception aqui si el numero es negativo.
+		//Exception aqui si el numero es negativo. ok
 		
-		this.rentaPerCapita = rentaPerCapita;
+		if (rentaPerCapita>=0) {						
+			this.rentaPerCapita= rentaPerCapita;			
+		}
+		else {
+			throw new PuebloException("[ERROR] El numero es negativo");
+		}
 	}
 
 
@@ -84,7 +153,12 @@ public class Pueblo implements Comparable<Pueblo> {
 		
 		//Aqui se debe poner una Exception.
 		
-		this.superficie = superficie;
+		if (superficie>=0) {
+			this.superficie = superficie;
+		}
+		else {
+			throw new PuebloException("[ERROR] Valor no aceptado.");
+		}
 	}
 
 
@@ -109,23 +183,29 @@ public class Pueblo implements Comparable<Pueblo> {
 	//equals() de Pueblo
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		boolean sonIguales= false;
 		Pueblo other = (Pueblo) obj;
-		return Objects.equals(codigo, other.codigo) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(numeroHabitantes, other.numeroHabitantes)
-				&& Objects.equals(rentaPerCapita, other.rentaPerCapita) && Objects.equals(superficie, other.superficie);
-	}
+		
+		if(obj != null) {
+			if (this.codigo.equals(other.getCodigo()))
+				sonIguales = true;
+			
+			}
+		return sonIguales;	
+		}
 	
 	@Override
 	public int compareTo(Pueblo pueblo) {
 		
-		
-		return -1;
+		int resultado= 0;
+		if (!= null) {
+			if() {
+				resultado= 1;
+			}else if () {
+				resultado=-1;
+			}
+		}
+		return resultado;
 	}
 	
 	
