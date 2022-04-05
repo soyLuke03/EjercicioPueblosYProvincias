@@ -1,6 +1,6 @@
 package com.jacaranda.utilities;
 
-public class Provincia extends Pueblo {
+public class Provincia{
 
 	//Atributos de Provincia
 	private String nombre;
@@ -12,7 +12,7 @@ public class Provincia extends Pueblo {
 		
 	
 	//Constructores de Provincia
-	public Provincia (String nombre, String codigo) {
+	public Provincia (String nombre, String codigo) 
 		this.nombre = nombre.toUpperCase();  //Debe de almacenarse en mayus.
 		this.codigo = codigo;	//Debe ser un numero de 2 cifras
 	}

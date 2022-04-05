@@ -1,5 +1,6 @@
 package com.jacaranda.utilities;
 
+import java.util.Collection;
 import java.util.Objects;
 
 public class Pueblo implements Comparable<Pueblo> {
@@ -11,6 +12,7 @@ public class Pueblo implements Comparable<Pueblo> {
 	private Double rentaPerCapita;
 	private Double superficie;
 	
+	private Collection<Pueblo> pueblo;
 	
 	
 	//Constructores de Pueblo
@@ -18,11 +20,26 @@ public class Pueblo implements Comparable<Pueblo> {
 			  	  Double rentaPerCapita, Double superficie) 
 				  throws PuebloException {
 		super();
-		this.nombre = nombre.toUpperCase();  		//Se debe almacenar en mayus.
+		this.nombre = nombre.toUpperCase();  		//Se debe almacenar en mayus. ok
+		
 		this.codigo = codigo;						//5 caracteres numericos. Se lanza Exception.
-		this.numeroHabitantes = numeroHabitantes;	//Lanzar Exception si es negativo.
-		this.rentaPerCapita = rentaPerCapita;		//Valor negativo ==> Exception
+		
+		if (numeroHabitantes>=0) {
+			this.numeroHabitantes = numeroHabitantes;	//Lanzar Exception si es negativo.	ok		
+		}
+		else {
+			throw new PuebloException("[ERROR] El numero es negativo");
+		}
+		
+		if (rentaPerCapita>=0) {						//Valor negativo ==> Exception ok
+			this.rentaPerCapita= rentaPerCapita;			
+		}
+		else {
+			throw new PuebloException("[ERROR] El numero es negativo");
+		}
+		
 		this.superficie = superficie;				//Valor negativo ==> Exception
+	
 	}
 	
 	
@@ -105,7 +122,7 @@ public class Pueblo implements Comparable<Pueblo> {
 	}
 	
 	@Override
-	public Integer compareTo(Pueblo pueblo) {
+	public int compareTo(Pueblo pueblo) {
 		
 		
 		return -1;
