@@ -8,6 +8,9 @@ public class Pueblo implements Comparable<Pueblo> {
 	//Atributos de Pueblo
 	private String nombre;
 	private String codigo;
+
+
+
 	private Integer numeroHabitantes;
 	private Double rentaPerCapita;
 	private Double superficie;
@@ -67,9 +70,19 @@ public class Pueblo implements Comparable<Pueblo> {
 		else {
 			throw new PuebloException("[ERROR] El numero es negativo");
 		}
+		
 	
 	}
-	
+	//otro constructor//
+	public Pueblo(String nombre, String codigo, int numeroHabitantes, double rentaPerCapita, double superficie)
+			throws PuebloException {
+		super();
+		this.nombre = nombre.toUpperCase();
+		this.setCodigo(codigo);
+		this.setNumeroHabitantes(numeroHabitantes);
+		this.setRentaPerCapita(rentaPerCapita);
+		this.setSuperficie(superficie);
+	}
 	
 	
 	
@@ -129,6 +142,13 @@ public class Pueblo implements Comparable<Pueblo> {
 
 	public Double getRentaPerCapita() {
 		return rentaPerCapita;
+	}
+
+	private void setCodigo(String codigo) throws PuebloException {
+		if (codigo == null || (codigo.length() != 5 && !codigo.chars().allMatch(Character::isDigit))) {
+			throw new PuebloException("Error no se puede crear el pueblo");
+		}
+		this.codigo = codigo;
 	}
 
 
@@ -198,15 +218,17 @@ public class Pueblo implements Comparable<Pueblo> {
 	public int compareTo(Pueblo pueblo) {
 		
 		int resultado= 0;
-		if (!= null) {
-			if() {
-				resultado= 1;
-			}else if () {
-				resultado=-1;
+		if (pueblo == null) {
+			resultado=-1;
+				
+			}else {
+				resultado = this.nombre.compareTo(pueblo.nombre);
+			}if (resultado == 0) {
+				resultado = this.nombre.compareTo(pueblo.nombre);
 			}
+			return resultado;
 		}
-		return resultado;
-	}
+	
 	
 	
 	//toString() de Pueblo
